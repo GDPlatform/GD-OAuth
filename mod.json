@@ -8,10 +8,19 @@
     },
     "id": "skunkplatform.gd-oauth",
     "name": "GD-OAuth",
-    "version": "v1.0.0",
+    "version": "1.0.1",
     "developer": "SkunkPlatform",
     "description": "Your Secure Authentication",
     "dependencies": {
-		"geode.node-ids": ">=v1.20.0"
-	}
+        "geode.node-ids": ">=v1.20.0"
+    },
+    "resources": {
+        "sprites": [
+            "resources/ic_auth.png",
+            "resources/ic_secure.png",
+            "resources/ic_error.png",
+            "resources/ic_warning.png",
+            "resources/ic_unsafe.png"
+        ]
+    }
 }

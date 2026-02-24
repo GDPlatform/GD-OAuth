@@ -18,13 +18,11 @@ public:
 
         std::string jsonStr = body.dump();
         
-        // --- CORRECCIÓN AQUÍ ---
-        // Convertimos el string a ByteVector (std::vector<uint8_t>)
         geode::ByteVector payload(jsonStr.begin(), jsonStr.end());
 
         web::WebRequest()
             .header("Content-Type", "application/json")
-            .body(payload) // Ahora el tipo coincide perfectamente
+            .body(payload)
             .post(getBaseURL() + "/geodesdk/gd-oauth/generate-code")
             .listen([callback](web::WebResponse *res)
             {
