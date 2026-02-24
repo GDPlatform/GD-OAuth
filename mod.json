@@ -6,9 +6,8 @@
         "mac": "2.2074",
         "ios": "2.2074"
     },
-    "id": "gdplatform.gd-oauth",
+    "id": "skunkplatform.gd-oauth",
     "name": "GD-OAuth",
-<<<<<<< HEAD
     "version": "1.0.1",
     "developer": "SkunkPlatform",
     "description": "Your Secure Authentication",
@@ -25,12 +24,3 @@
         ]
     }
 }
-=======
-    "version": "0.1.0",
-    "developer": "GDPlatform",
-    "description": "Your Secure Authentication",
-    "dependencies": {
-		"geode.node-ids": ">=v1.20.0"
-	}
-}
->>>>>>> 204e249b88aaca3eb218936ea608119aa6a77768

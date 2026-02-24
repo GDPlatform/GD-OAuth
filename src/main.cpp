@@ -1,78 +1,58 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MenuLayer.hpp>
 #include "authenticator.hpp"
+#include "ui/_authsection.hpp"
 
 using namespace geode::prelude;
 
 class $modify(MyMenuLayer, MenuLayer)
 {
-    bool init()
+    bool init() override
     {
         if (!MenuLayer::init())
-        {
             return false;
-        }
 
-<<<<<<< HEAD
-        auto sprite = CCSprite::create("ic_auth.png");
+        auto sprite = CCSprite::create((Mod::get()->getResourcesDir() / "ic_auth.png").string().c_str());
         if (!sprite)
         {
-            log::error("No se pudo cargar ic_auth.png");
+            log::error("ic_auth.png (404)");
             return true;
         }
-=======
-        auto myButton = CCMenuItemSpriteExtra::create(
-            CCSprite::createWithSpriteFrameName("GJ_likeBtn_001.png"),
-            this,
-            menu_selector(MyMenuLayer::onMyButton)
-        );
->>>>>>> 204e249b88aaca3eb218936ea608119aa6a77768
 
-        auto myButton = CCMenuItemSpriteExtra::create(
-            sprite,
-            this,
-            menu_selector(MyMenuLayer::onMyButton));
+        sprite->setScale(0.5f);
 
-        if (myButton)
+        auto myButton = CCMenuItemSpriteExtra::create(sprite, this, menu_selector(MyMenuLayer::onMyButton));
+        if (!myButton)
+            return true;
+
+        myButton->setID("gd-oauth-button"_spr);
+
+        auto menu = this->getChildByID("bottom-menu");
+        if (!menu)
         {
-            myButton->setID("gd-oauth-button"_spr);
-
-            auto menu = this->getChildByID("bottom-menu");
-
-            if (menu)
-            {
-                menu->addChild(myButton);
-                menu->updateLayout();
-<<<<<<< HEAD
-            }
-            else
-            {
-=======
-            } 
-
-            else {
->>>>>>> 204e249b88aaca3eb218936ea608119aa6a77768
-                auto fallbackMenu = CCMenu::create();
-                fallbackMenu->setPosition({40, 40});
-                fallbackMenu->addChild(myButton);
-                this->addChild(fallbackMenu, 100);
-            }
+            menu = CCMenu::create();
+            menu->setPosition({40, 40});
+            this->addChild(menu, 100);
         }
+
+        menu->addChild(myButton);
+        menu->updateLayout();
 
         return true;
     }
 
-<<<<<<< HEAD
-    /**
-     * Callback del botón: Llama al proceso de autenticación real.
-     */
     void onMyButton(CCObject *sender)
     {
-        // Instanciamos el autenticador para iniciar la petición a la API
-=======
-    void onMyButton(CCObject* sender) {
->>>>>>> 204e249b88aaca3eb218936ea608119aa6a77768
-        Authenticator auth;
-        auth.startAuthProcess();
+        auto section = AuthSection::create();
+        if (!section)
+            return;
+
+        section->setTouchEnabled(true);
+
+        auto runningScene = CCDirector::sharedDirector()->getRunningScene();
+        if (runningScene)
+        {
+            runningScene->addChild(section, 1000);
+        }
     }
 };
