@@ -8,7 +8,7 @@ class GDAuthAPI
 {
 public:
     static inline std::string getBaseURL() {
-        return "http://api--gdplatform.netlify.app"; 
+        return "http://localhost:8888"; 
     }
 
     static void generateVerificationCode(int accountID, std::function<void(std::string)> callback)
