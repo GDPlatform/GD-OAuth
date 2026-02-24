@@ -1,0 +1,17 @@
+{
+    "geode": "4.10.1",
+    "gd": {
+        "win": "2.2074",
+        "android": "2.2074",
+        "mac": "2.2074",
+        "ios": "2.2074"
+    },
+    "id": "skunkplatform.gd-oauth",
+    "name": "GD-OAuth",
+    "version": "v1.0.0",
+    "developer": "SkunkPlatform",
+    "description": "Your Secure Authentication",
+    "dependencies": {
+		"geode.node-ids": ">=v1.20.0"
+	}
+}
