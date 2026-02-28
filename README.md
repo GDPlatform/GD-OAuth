@@ -24,5 +24,4 @@ The Mod is a part of verification because only works GDPlatform Website Official
 
 Geometry Dash OAuth2 is a Provider that allows Developers to use this Provider and GDPlatform API.
 
-Note: This Mod includes GDPlatform API (HTTP Request) for JavaScript, Java, Laravel, PHP and C++.
-
+Note: This Mod includes GDPlatform API (HTTP Request) for JavaScript, Java, Laravel, PHP and C++. from this geode build is not built on GitHub.
