@@ -4,7 +4,7 @@ GD-OAuth is a Mod used to work Authentication Code and API.
 
 ## OAuth with GDPlatform API Example Usage
 
-For Example (JavaScript):
+For Example (JavaScript - GDPlatform OAuth):
 ```js
 fetch("https://api--gdplatform.netlify.app/oauth/code", {
   method: "POST",
@@ -24,4 +24,4 @@ The Mod is a part of verification because only works GDPlatform Website Official
 
 Geometry Dash OAuth2 is a Provider that allows Developers to use this Provider and GDPlatform API.
 
-Note: This Mod includes GDPlatform API (HTTP Request) for JavaScript, Java, Laravel, PHP and C++. from this geode build is not built on GitHub.
+Note: This Mod includes GDPlatform API (HTTP Request) for JavaScript, Java, Laravel, PHP and C++. from this geode build is not built on GitHub. The mod is not used for dependency api, it also uses http requests.
