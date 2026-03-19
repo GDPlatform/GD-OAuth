@@ -9,7 +9,7 @@ class $modify(MyMenuLayer, MenuLayer) {
         if (!MenuLayer::init())
             return false;
 
-        auto sprite = CCSprite::create("resources/ic_auth.png");
+        auto sprite = CCSprite::create("resources/ic_auth.png"_spr);
         
         if (!sprite) {
             sprite = CCSprite::createWithSpriteFrameName("GJ_downloadsIcon_001.png");
