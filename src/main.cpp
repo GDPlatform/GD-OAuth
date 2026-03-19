@@ -22,6 +22,9 @@ class $modify(MyMenuLayer, MenuLayer) {
             menu_selector(MyMenuLayer::onMyButton)
         );
 
+        if (sprite) {
+            myButton->setScale(0.5f);
+        }
         myButton->setID("gd-oauth-button"_spr);
 
         if (auto menu = this->getChildByID("bottom-menu")) {
