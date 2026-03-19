@@ -1,56 +1,45 @@
 #pragma once
 #include <Geode/utils/web.hpp>
+#include <Geode/utils/async.hpp>
 #include <matjson.hpp>
 
 using namespace geode::prelude;
 
-class GDAuthAPI
-{
+class GDAuthAPI {
 public:
     static inline std::string getBaseURL() {
-        return "http://api--gdplatform.netlify.app"; 
+        return "http://api--gdplatform.netlify.app";
     }
 
-    static void generateVerificationCode(int accountID, std::function<void(std::string)> callback)
-    {
+    static void generateVerificationCode(int accountID, std::function<void(std::string)> callback) {
         matjson::Value body;
         body["accountId"] = accountID;
 
-        std::string jsonStr = body.dump();
-        
-        geode::ByteVector payload(jsonStr.begin(), jsonStr.end());
+        auto req = web::WebRequest();
+        req.bodyJSON(body);
 
-        web::WebRequest()
-            .header("Content-Type", "application/json")
-            .body(payload)
-            .post(getBaseURL() + "/geodesdk/gd-oauth/generate-code")
-            .listen([callback](web::WebResponse *res)
-            {
-                if (res->ok()) {
-                    auto json = res->json().unwrapOr(matjson::Value());
-                    if (json.contains("code")) {
-                        callback(json["code"].asString().unwrapOr("ERR!"));
-                    } else {
-                        callback("ERR!");
-                    }
-                } else {
-                    callback("HR_FAILED");
-                } 
-            });
+        geode::async::spawn(req.post(getBaseURL() + "/geodesdk/gd-oauth/generate-code"), [callback](auto const& res) {
+            if (res.ok()) {
+                auto json = res.json().unwrapOr(matjson::Value());
+                if (json.contains("code") && json["code"].isString()) {
+                    callback(json["code"].asString().unwrapOr("ERR!"));
+                    return;
+                }
+            }
+            callback("ERR!");
+        });
     }
 
-    static void checkAuthStatus(std::string const& code, std::function<void(std::string)> callback)
-    {
-        web::WebRequest()
-            .get(getBaseURL() + "/geodesdk/gd-oauth/status?code=" + code)
-            .listen([callback](web::WebResponse *res)
-            {
-                if (res->ok()) {
-                    auto json = res->json().unwrapOr(matjson::Value());
-                    callback(json["status"].asString().unwrapOr("pending"));
-                } else {
-                    callback("pending");
-                }
-            });
+    static void checkAuthStatus(const std::string& code, std::function<void(std::string)> callback) {
+        auto req = web::WebRequest();
+        
+        geode::async::spawn(req.get(getBaseURL() + "/geodesdk/gd-oauth/status?code=" + code), [callback](auto const& res) {
+            if (res.ok()) {
+                auto json = res.json().unwrapOr(matjson::Value());
+                callback(json["status"].asString().unwrapOr("pending"));
+            } else {
+                callback("pending");
+            }
+        });
     }
 };

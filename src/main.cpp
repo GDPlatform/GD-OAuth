@@ -1,58 +1,42 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MenuLayer.hpp>
-#include "authenticator.hpp"
 #include "ui/_authsection.hpp"
 
 using namespace geode::prelude;
 
-class $modify(MyMenuLayer, MenuLayer)
-{
-    bool init() override
-    {
+class $modify(MyMenuLayer, MenuLayer) {
+    bool init() override {
         if (!MenuLayer::init())
             return false;
 
-        auto sprite = CCSprite::create((Mod::get()->getResourcesDir() / "ic_auth.png").string().c_str());
-        if (!sprite)
-        {
-            log::error("ic_auth.png (404)");
-            return true;
+        auto sprite = CCSprite::create("ic_auth.png");
+        
+        if (!sprite) {
+            sprite = CCSprite::createWithSpriteFrameName("GJ_downloadsIcon_001.png");
+            log::warn("ic_auth.png returned to undefined or null, using fallback.");
         }
 
-        sprite->setScale(0.5f);
-
-        auto myButton = CCMenuItemSpriteExtra::create(sprite, this, menu_selector(MyMenuLayer::onMyButton));
-        if (!myButton)
-            return true;
+        auto myButton = CCMenuItemSpriteExtra::create(
+            sprite, 
+            this, 
+            menu_selector(MyMenuLayer::onMyButton)
+        );
 
         myButton->setID("gd-oauth-button"_spr);
 
-        auto menu = this->getChildByID("bottom-menu");
-        if (!menu)
-        {
-            menu = CCMenu::create();
-            menu->setPosition({40, 40});
-            this->addChild(menu, 100);
-        }
+        if (auto menu = this->getChildByID("bottom-menu")) {
+            menu->addChild(myButton);
 
-        menu->addChild(myButton);
-        menu->updateLayout();
+            menu->updateLayout();
+        }
 
         return true;
     }
 
-    void onMyButton(CCObject *sender)
-    {
+    void onMyButton(CCObject* sender) {
         auto section = AuthSection::create();
-        if (!section)
-            return;
-
-        section->setTouchEnabled(true);
-
-        auto runningScene = CCDirector::sharedDirector()->getRunningScene();
-        if (runningScene)
-        {
-            runningScene->addChild(section, 1000);
+        if (section) {
+            CCScene::get()->addChild(section, 100); 
         }
     }
 };

@@ -1,26 +1,22 @@
 {
-    "geode": "4.10.1",
+    "geode": "5.3.0",
     "gd": {
-        "win": "2.2074",
-        "android": "2.2074",
-        "mac": "2.2074",
-        "ios": "2.2074"
+        "win": "2.2081",
+        "android": "2.2081",
+        "mac": "2.2081",
+        "ios": "2.2081"
     },
     "id": "skunkplatform.gd-oauth",
     "name": "GD-OAuth",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "developer": "SkunkPlatform",
     "description": "Your Secure Authentication",
     "dependencies": {
-        "geode.node-ids": ">=v1.20.0"
+        "geode.node-ids": ">=v1.23.0"
     },
     "resources": {
         "sprites": [
-            "resources/ic_auth.png",
-            "resources/ic_secure.png",
-            "resources/ic_error.png",
-            "resources/ic_warning.png",
-            "resources/ic_unsafe.png"
+            "resources/*.png"
         ]
     }
 }
