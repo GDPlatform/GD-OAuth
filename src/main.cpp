@@ -23,7 +23,7 @@ class $modify(MyMenuLayer, MenuLayer) {
         );
 
         if (sprite) {
-            myButton->setScale(0.5f);
+            myButton->setScale(0.35f);
         }
         myButton->setID("gd-oauth-button"_spr);
 
