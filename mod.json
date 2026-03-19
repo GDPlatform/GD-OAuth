@@ -16,7 +16,7 @@
     },
     "resources": {
         "sprites": [
-            "resources/*.png"
+            "resources/ic_auth.png"
         ]
     }
 }
