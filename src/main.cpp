@@ -9,11 +9,11 @@ class $modify(MyMenuLayer, MenuLayer) {
         if (!MenuLayer::init())
             return false;
 
-        auto sprite = CCSprite::create("ic_auth.png"_spr);
+        auto sprite = CCSprite::create("ic_generate.png"_spr);
         
         if (!sprite) {
             sprite = CCSprite::createWithSpriteFrameName("GJ_downloadsIcon_001.png");
-            log::warn("ic_auth.png returned to undefined or null, using fallback.");
+            log::warn("ic_generate.png returned to undefined or null, using fallback.");
         }
 
         auto myButton = CCMenuItemSpriteExtra::create(
@@ -23,7 +23,7 @@ class $modify(MyMenuLayer, MenuLayer) {
         );
 
         if (sprite) {
-            myButton->setScale(0.25f);
+            // myButton->setScale(1f);
         }
         myButton->setID("gd-oauth-button"_spr);
 
